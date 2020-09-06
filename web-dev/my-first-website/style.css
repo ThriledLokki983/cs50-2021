@@ -3,4 +3,5 @@ body{
  font-size: 3rem;
  text-align: center;
  padding: 10px;
+ text-justify: inter-cluster;
 }
