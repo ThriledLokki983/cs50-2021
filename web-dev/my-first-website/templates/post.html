@@ -20,7 +20,9 @@
 </form>
 <hr>
 
-{% for line in posts %}
+{% for line in posting %}
+
+    <h1>{{line.id}}</h1>
     <h2>{{ line.title }}</h2>
 
     {% if line.author %}
@@ -30,8 +32,8 @@
     {% endif %}
 
     <p>{{ line.content }}</p>
-    <a href="/post/delete/{{posts.id}}">Delete</a>
-    <a href="/post/edit/{{posts.id}}">Edit</a>
+    <a href="{{url_for('delete',id=line.id)}}">Delete</a>
+    <a href="{{url_for('edit',id=line.id)}}">Edit</a>
     <h3>{{ line.date }}</h3>
     <hr>
 {% endfor %}
