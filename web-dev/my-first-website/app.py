@@ -54,9 +54,12 @@ def post():
         all_post = BlogPost.query.order_by(BlogPost.date).all()
         return render_template('post.html', posts=all_post)
 
-@app.route('/get', methods = ['POST'])
-def get():
-    return "<h1>You get this web only<h1>"
+@app.route('/post/delete/<int:id>')
+def delete(id):
+    posts = BlogPost.query.get_or_404(id)
+    db.session.delete(posts)
+    db.session.commit()
+    return redirect('/post')
 
 if __name__ == "__main__":
     app.run(debug=True)

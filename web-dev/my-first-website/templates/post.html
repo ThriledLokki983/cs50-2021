@@ -30,7 +30,10 @@
     {% endif %}
 
     <p>{{ line.content }}</p>
+    <a href="/post/delete/{{posts.id}}">Delete</a>
+    <a href="">Edit</a>
     <h3>{{ line.date }}</h3>
+    <hr>
 {% endfor %}
 
 
