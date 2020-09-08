@@ -62,10 +62,10 @@ def delete(id):
     return redirect('/post')
 
 
-@app.route('/post/edit/<int:id>', methods=['GET' 'POST'])
+@app.route('/post/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     posts = BlogPost.query.get_or_404(id)
-    
+
     if request.method == 'POST':
         posts.title = request.form['title']
         posts.content = request.form['content']
