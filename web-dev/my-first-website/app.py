@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
 
@@ -40,9 +40,19 @@ all_post = [
 def index():
     return render_template('index.html')
 
-@app.route('/post')
+@app.route('/post', methods=['GET', 'POST'])
 def post():
-    return render_template('post.html', posts=all_post)
+    if request.method == 'POST':
+        post_title = request.form['title']
+        post_content = request.form['content']
+        post_author = request.form['author']
+        new_post = BlogPost(title=post_title, author=post_author, content=post_content)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/post')
+    else:
+        all_post = BlogPost.query.order_by(BlogPost.date).all()
+        return render_template('post.html', posts=all_post)
 
 @app.route('/get', methods = ['POST'])
 def get():
