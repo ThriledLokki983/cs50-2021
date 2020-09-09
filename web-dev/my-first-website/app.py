@@ -1,10 +1,11 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
 
 
 app = Flask(__name__)
 app.config['FLASK_DEBUG'] = True
+app.config['SECRET_KEY'] = "ogidi@12"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 db = SQLAlchemy(app)
@@ -18,6 +19,18 @@ class BlogPost(db.Model):
 
     def __repr__(self):
         return 'Blog Post ' + str(self.id)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    username = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
+    confirm = db.Column(db.String(80), nullable=False)
+
+    def __repr__(self):
+        return 'Users' + str(self.id)
+
 
 
 all_post = [
@@ -95,9 +108,24 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html')
+    error = None
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        password = request.form['password']
+        confirm = request.form['confirm']
+        new_user = User(name=name, username=username, password=password, confirm=confirm)
+        db.session.add(new_user)
+        db.session.commit()
+        if password != confirm:
+            return render_template('error.html')
+        else:
+            flash('You were successfully Registered')
+            return render_template('register.html', error=error)
+    else:
+        return render_template('register.html')
 
 
 if __name__ == "__main__":
