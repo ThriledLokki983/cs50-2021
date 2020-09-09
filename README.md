@@ -1,1 +1,1 @@
-# This is how I started profeesionally web developing.
+# This is how I started professional web developing.
