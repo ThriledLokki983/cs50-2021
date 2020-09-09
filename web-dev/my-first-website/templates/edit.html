@@ -10,11 +10,14 @@
 <hr>
 <h2>Edit:</h2>
 <form  action="/post/edit/{{post.id}}" method="POST">
-    Title: <input type="text" name="title" id="title" value="{{post.title}}">
+    Title: 
+    <input class="form-control mr-sm-2" type="text" name="title" id="title" placeholder="Title" aria-label="Title" value="{{post.title}}">
     <br>
-    Post: <input type="text" name="content" id="content" value="{{post.content}}">
+    Post: 
+    <input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Content" value="{{post.content}}">
     <br>
-    Author: <input type="text" name="author" id="author" value="{{post.author}}"">
+    Author: 
+    <input class="form-control mr-sm-2" type="text" name="author" id="author" placeholder="Author" aria-label="Author" value="{{post.author}}">
     <br>
     <input type="submit" value="Save">
 </form>

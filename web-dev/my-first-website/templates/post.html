@@ -10,33 +10,38 @@
 <hr>
 <h2>Create a new Blog Post:</h2>
 <form  action="/post" method="POST">
-    Title: <input type="text" name="title" id="title">
-    <br><br>
-    Post: <input type="text" name="content" id="content">
-    <br><br>
-    Author: <input type="text" name="author" id="author">
-    <br><br>
+    Title:
+    <input class="form-control mr-sm-2" type="text" name="title" id="title" placeholder="Title" aria-label="Search">
+    <br>
+    Post: 
+    <input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Search">
+    <br>
+    Author: 
+    <input class="form-control mr-sm-2" type="text" name="author" id="author" placeholder="Author" aria-label="Author">
+    <br>
     <input type="submit" value="Post">
 </form>
 <hr>
 
 {% for line in posting %}
 
-    <h1>{{line.id}}</h1>
+    <!-- <h1>{{line.id}}</h1> -->
+    <br>
     <h2>{{ line.title }}</h2>
 
     {% if line.author %}
-    <h3>Written By: {{ line.author }}</h3>
+        <small>Written By: {{ line.author }} on {{ line.date }}</small>
     {% else %}
-    <h3>By: No Author</h3>
+        <small>Written By: Unknown on {{ line.date }}</small>
     {% endif %}
 
     <p>{{ line.content }}</p>
-    <a href="{{url_for('delete',id=line.id)}}">Delete</a>
-    <a href="{{url_for('edit',id=line.id)}}">Edit</a>
+    <a class="btn btn-danger"  href="{{url_for('delete',id=line.id)}}">Delete</a>
+    <a class="btn btn-primary" href="{{url_for('edit',id=line.id)}}">Edit</a>
     <!-- <h3>{{ line.date }}</h3> -->
     <hr>
 {% endfor %}
+<br>
 
 
 {% endblock %}
