@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+<title>Login Page</title>
+{% endblock %}
+
+{% block body %} 
+<br><br><br>
+<form style="width: 300px; margin-left: 30%; margin-top: 15%;"class="form-signin">
+ <img style="margin-left: 35%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
+ <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+ <label for="inputEmail" class="sr-only">Email address</label>
+ <input style="width: 300px;" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+ <label for="inputPassword" class="sr-only">Password</label>
+ <input style="width: 300px;" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+ <div class="checkbox mb-3">
+   <label>
+     <input type="checkbox" value="remember-me"> Remember me
+   </label>
+ </div>
+ <button style="width:" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+ <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+</form>
+
+{% endblock %}

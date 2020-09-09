@@ -90,11 +90,14 @@ def newpost():
         return render_template('/newpost.html')
 
         
-@app.route('/edit')
-def edit_page():
-    return render_template('edit.html')
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
 
 
 if __name__ == "__main__":
