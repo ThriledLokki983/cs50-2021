@@ -10,16 +10,18 @@
 <hr>
 <h2>Create a new Blog Post:</h2>
 <form  action="/post" method="POST">
-    Title:
+    <label for="content">Title</label>
     <input class="form-control mr-sm-2" type="text" name="title" id="title" placeholder="Title" aria-label="Search">
     <br>
-    Post: 
-    <input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Search">
+    <label for="content">Author</label>
+    <input class="form-control mr-sm-2" type="text" name="author" id="author" placeholder="Enter Author" aria-label="Author">
     <br>
-    Author: 
-    <input class="form-control mr-sm-2" type="text" name="author" id="author" placeholder="Author" aria-label="Author">
+     <!--<input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Search">-->
+
+     <label for="content">Post</label>
+     <textarea class="form-control" name="content" id="content" rows="3" placeholder=" Enter Content"></textarea>
     <br>
-    <input type="submit" value="Post">
+    <input class="btn btn-secondary" type="submit" value="Post">
 </form>
 <hr>
 
@@ -35,7 +37,7 @@
         <small>Written By: Unknown on {{ line.date }}</small>
     {% endif %}
 
-    <p>{{ line.content }}</p>
+    <p style="white-space: pre-wrap;">{{ line.content }}</p>
     <a class="btn btn-danger"  href="{{url_for('delete',id=line.id)}}">Delete</a>
     <a class="btn btn-primary" href="{{url_for('edit',id=line.id)}}">Edit</a>
     <!-- <h3>{{ line.date }}</h3> -->

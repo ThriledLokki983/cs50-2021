@@ -10,16 +10,18 @@
 <hr>
 <h2>Edit:</h2>
 <form  action="/post/edit/{{post.id}}" method="POST">
-    Title: 
-    <input class="form-control mr-sm-2" type="text" name="title" id="title" placeholder="Title" aria-label="Title" value="{{post.title}}">
+    <label for="content">Title</label>
+    <input class="form-control mr-sm-2" type="text" name="title" id="title" value="{{post.title}}" aria-label="Search">
     <br>
-    Post: 
-    <input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Content" value="{{post.content}}">
+    <label for="content">Author</label>
+    <input class="form-control mr-sm-2" type="text" name="author" id="author" value="{{post.author}}" aria-label="Author">
     <br>
-    Author: 
-    <input class="form-control mr-sm-2" type="text" name="author" id="author" placeholder="Author" aria-label="Author" value="{{post.author}}">
+     <!--<input class="form-control mr-sm-2" type="text" name="content" id="content" placeholder="Content" aria-label="Search">-->
+
+     <label for="content">Post</label>
+     <textarea class="form-control" name="content" id="content" rows="3" placeholder=" Enter Content">{{post.content}}</textarea>
     <br>
-    <input type="submit" value="Save">
+    <input class="btn btn-secondary" type="submit" value="Save">
 </form>
 <hr>
 
