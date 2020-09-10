@@ -110,7 +110,6 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    error = None
     if request.method == 'POST':
         name = request.form['name']
         username = request.form['username']
@@ -122,8 +121,7 @@ def register():
         if password != confirm:
             return render_template('error.html')
         else:
-            flash('You were successfully Registered')
-            return render_template('register.html', error=error)
+            return render_template('success.html')
     else:
         return render_template('register.html')
 
