@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
+from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ class BlogPost(db.Model):
         return 'Blog Post ' + str(self.id)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     username = db.Column(db.String(80), nullable=False)
@@ -123,9 +124,10 @@ def register():
     if request.method == 'POST':
         name = request.form['name']
         username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
         confirm = request.form['confirm']
-        new_user = User(name=name, username=username, password=password, confirm=confirm)
+        new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
         db.session.add(new_user)
         db.session.commit()
         if password != confirm:
