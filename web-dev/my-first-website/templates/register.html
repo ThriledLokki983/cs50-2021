@@ -7,15 +7,16 @@
 {% block body %} 
 
 
-<div style="margin-top: 20%; margin-left: 30%; align-content: center;" class="container">
+<div style="margin-top: 20%; margin-left: 33%; align-content: center;" class="container">
  <form action="/register" method="POST">  
-  <div class="form-group" style="width: 300px;">
-    <input style="display: inline;" type="text" name="name" id="name1" class="form-control" placeholder="First Name" required>
-    <br>
-    <input style="display: inline;" type="text" name="name" id="name2" class="form-control" placeholder="Other Names" required>
-    <br>
-    <input type="text" name="name" id="name" class="form-control" placeholder="Full Name" required>
-  </div>
+  <div class="input-group flex-nowrap" style="width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-badge-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
+        </svg></span>
+    </div>
+      <input type="text" class="form-control" placeholder="Full Name" id="name" name="name" aria-label="Full Name" aria-describedby="addon-wrapping" required>
+  </div><br>
 
   <div class="input-group flex-nowrap" style="width: 300px;">
     <div class="input-group-prepend">
@@ -35,12 +36,26 @@
       <input type="email" class="form-control" placeholder="Email" id="email" name="email" aria-label="Email" aria-describedby="addon-wrapping" required>
   </div><br>
 
- <div class="form-group" style="width: 300px;">
-  <input type="password" name="password" id="password" class="form-control" placeholder="password" required>
-</div>
-<div class="form-group" style="width: 300px;">
- <input type="password" name="confirm" id="confirm" class="form-control" placeholder="confirm password" required>
-</div>
+  <div class="input-group flex-nowrap" style="width: 300px;">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+      <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+      </svg></span>
+    </div>
+      <input type="password" class="form-control" placeholder="Password" id="password" name="password" aria-label="Password" aria-describedby="addon-wrapping" required>
+  </div><br>
+
+  <div class="input-group flex-nowrap" style="width: 300px;">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+      <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+      </svg></span>
+    </div>
+      <input type="password" class="form-control" placeholder="Confirm Password" id="confirm" name="confirm" aria-label="COnfirm" aria-describedby="addon-wrapping" required>
+  </div><br>
+
 <button style="width: 300px" class="btn btn-lg btn-primary btn-block" type="submit">Register</button><br>
 <p style="font-size: small;">Already registered? <a href="/login">Login Here</a></p>
 <p style="margin-left: 10%;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
