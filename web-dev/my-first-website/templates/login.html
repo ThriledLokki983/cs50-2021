@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block head %} 
-<title>Login Page</title>
+<title>Login</title>
 {% endblock %}
 
 {% block body %} 
-<br><br><br>
-<form style="width: 300px; margin-left: 30%; margin-top: 15%;"class="form-signin" action="" method="POST">
- <img style="margin-left: 35%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
- <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+<div style="align-content: center; margin-top: 20%; margin-left: 30%;">
+<form style="width: 300px;"class="form-signin" action="" method="POST">
+ <img style="margin-left: 38%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
+ <h1 style="font-size: 18px; font-weight: bold; text-align: center;">Login</h1>
  <label for="inputEmail" class="sr-only">Email address</label>
  <input style="width: 300px;" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
  <label for="inputPassword" class="sr-only">Password</label>
@@ -21,5 +21,6 @@
  <button style="width:" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
  <p style="margin-left: 40%;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
 </form>
+</div>
 
 {% endblock %}
