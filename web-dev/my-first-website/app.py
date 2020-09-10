@@ -103,9 +103,19 @@ def newpost():
         return render_template('/newpost.html')
 
         
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if username != request.form['username'] or password != request.form['password']:
+            error = 'Try Again: Invalid Credentials'
+        else:
+            flash('You have successfully logged in')
+            return render_template('/post.html', error=error)
+    else:
+        return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -6,21 +6,37 @@
 
 {% block body %} 
 <div style="align-content: center; margin-top: 20%; margin-left: 30%;">
-<form style="width: 300px;"class="form-signin" action="" method="POST">
- <img style="margin-left: 38%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
- <h1 style="font-size: 18px; font-weight: bold; text-align: center;">Login</h1>
- <label for="inputEmail" class="sr-only">Email address</label>
- <input style="width: 300px;" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
- <label for="inputPassword" class="sr-only">Password</label>
- <input style="width: 300px;" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
- <div class="checkbox mb-3">
-   <label>
-     <input type="checkbox" value="remember-me"> Remember me
-   </label>
- </div>
- <button style="width:" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
- <p style="margin-left: 40%;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
-</form>
+  <form style="width: 300px;"class="form-signin" action="/login" method="POST">
+      <img style="margin-left: 38%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
+      <h1 style="font-size: 18px; font-weight: bold; text-align: center;">Login</h1><br>
+    <div class="input-group flex-nowrap">
+      <div class="input-group-prepend">
+          <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zm4.854-7.85a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+          </svg></span>
+      </div>
+        <input type="text" class="form-control" placeholder="Username" id="username" name="username" aria-label="Username" aria-describedby="addon-wrapping" required>
+    </div>
+
+    <div class="input-group flex-nowrap">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+        <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg></span>
+      </div>
+        <input type="password" class="form-control" placeholder="Password" id="password" name="password" aria-label="Password" aria-describedby="addon-wrapping" required>
+    </div>
+
+
+    <label>
+      <br>
+      <input style="margin-left: 0%;" type="checkbox" value="remember-me"> Remember me
+    </label>
+    <button style="width: 300px; margin-left: 0%;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br> 
+    <p style="font-size: small; text-align: center;">No account yet? <a href="/register">Register</a></p>
+    <p style="margin-left: 40%; font-weight: bold; font-size: small; color: black;" class="mt-5 mb-3 text-muted">&copy; 2020</p>
+  </form> 
 </div>
 
 {% endblock %}
