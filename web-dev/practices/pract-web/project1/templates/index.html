@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+<title>Home</title>
+{% endblock %}
+
+{% block body %} 
+<div style="margin-top: 10%;">
+ <h1 style="display: inline;">Home Page</h1>
+ <a style="display: inline;" href="/logout" class="btn btn-info float-right">Logout</a>
+ </div>
+ <Hr>
+ <div class="jumbotron" style="margin-top: 10rem;">
+  <div class="col-sm-8 mx-auto">
+    <h1>Welcome</h1>
+    <p>This example is a quick exercise to illustrate how the to_do application works. </p>
+    <ol>
+      <li>Click the <a href='#'>Post</a> to go to the Post page.</li>
+      <li>Fill in your to do item.</li>
+      <li>Click on post to finish.</li>
+    </ol>
+      <a class="btn btn-primary" href="#" role="button">To Do List &raquo;</a>
+    </p>
+  </div>
+ </div>
+
+{% endblock %}
