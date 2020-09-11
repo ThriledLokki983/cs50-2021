@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+<title>Register</title>
+{% endblock %}
+
+{% block body %} 
+<style>
+ body{
+  padding: 5%;
+ }
+
+ .form-group, h2{
+  background: coral;
+  width: 50%;
+  height: 40%;
+  margin-left: 25%;
+  border-radius: 2%;
+  display: inline-block;
+  text-align: center;
+ }
+
+</style>
+<div>
+<h2>Register Here</h2>
+
+<form action="/register" method="POST" class="form-group">
+
+ {{ form.csrf_token }}
+
+ {{ form.name.label }} {{ form.name(size=30) }}<br>
+ {{ form.username.label }} {{ form.username(size=30) }}<br>
+ {{ form.email.label }} {{ form.email(size=30) }}<br>
+ {{ form.password.label }} {{ form.password(size=30) }}<br>
+ {{ form.confirm.label }} {{ form.confirm(size=30) }}<br>
+ 
+ <input type="submit" value="Submit">
+</form>
+
+
+</div>
+{% endblock %}

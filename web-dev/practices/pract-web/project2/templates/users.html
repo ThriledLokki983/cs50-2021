@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block head %} 
+<title>Users</title>
+{% endblock %}
+
+{% block body %} 
+
+{% for line in user %}
+
+    <!-- <h1>{{line.id}}</h1> -->
+    <br>
+    <h2>{{ line.title }}</h2>
+
+    {% if line.author %}
+        <small>Written By: {{ line.author }} on {{ line.date }}</small>
+    {% else %}
+        <small>Written By: Unknown on {{ line.date }}</small>
+    {% endif %}
+
+    <p style="white-space: pre-wrap;">{{ line.content }}</p>
+    <a class="btn btn-danger"  href="{{url_for('delete',id=line.id)}}">Delete</a>
+    <a class="btn btn-primary" href="{{url_for('edit',id=line.id)}}">Edit</a>
+    <!-- <h3>{{ line.date }}</h3> -->
+    <hr>
+{% endfor %}
+<br>
+
+{% endblock %}
