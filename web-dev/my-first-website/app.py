@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 app = Flask(__name__)
@@ -47,11 +48,14 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username).first()
-        login_user(user)
-        return redirect(url_for('/'))
-    else:
-        return render_template('login.html')
+        user = db.session.query(User).filter(User.username == request.form['username']).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('login'))
+    return render_template('login.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -61,15 +65,15 @@ def register():
         email = request.form['email']
         password = request.form['password']
         confirm = request.form['confirm']
-        new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
-        db.session.add(new_user)
-        db.session.commit()
-        user = User.query.filter_by(username=username).first()
+        pswd_hash = generate_password_hash(password)
         if password != confirm:
-            return render_template('error.html')
+            return render_template('error.html', "Danger")
         else:
-            login_user(user)
-            return redirect('/')
+            new_user = User(name=name, username=username, email=email, password=pswd_hash, confirm=confirm)
+            db.session.add(new_user)
+            db.session.commit()
+            #login_user(user)
+            return redirect(url_for('login'))
     else:
         return render_template('register.html')
 
