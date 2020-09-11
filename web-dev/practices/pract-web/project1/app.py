@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, flash, request, redirect
+from flask import Flask, render_template, url_for, flash, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 
@@ -28,39 +28,37 @@ def get(id):
 def get_home():
     return render_template('index.html')
 
-@app.route('/login', methods=['GET'])
-def get_login():
-    return render_template('login.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        login_user(user)
+        return redirect('/')
+    else:
+        return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
-def post_login():
-    username = request.form['username']
-    password = request.form['password']
-    user = User.query.filter_by(username=username).first()
-    login_user(user)
-    return redirect('/')
-
-@app.route('/register', methods=['GET'])
-def get_register():
-    return render_template('register.html')
-
-@app.route('/register', methods=['POST'])
-def post_register():
-    name = request.form['name']
-    username = request.form['username']
-    email = request.form['email']
-    password = request.form['password']
-    confirm = request.form['confirm']
-    new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
-    db.session.add(new_user)
-    db.session.commit()
-    user = User.query.filter_by(email=email).first()
-    login_user(user)
-    return redirect('/')
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm = request.form['confirm']
+        new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
+        db.session.add(new_user)
+        db.session.commit()
+        user = User.query.filter_by(email=email).first()
+        login_user(user)
+        return redirect('/')
+    else:
+        return render_template('register.html')
 
 @app.route('/logout', methods=['GET'])
 def logout():
-    logout_user(current_user)
+    logout_user()
     return redirect('/login')
 
   
