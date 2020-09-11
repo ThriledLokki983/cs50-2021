@@ -42,24 +42,20 @@ def get_id():
 def index():
     return render_template('index.html')
 
-@app.route('/login', methods=['GET'])
-def get_login():
-    return render_template('login.html')
-
-@app.route('/login', methods=['POST'])
-def login_post():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
         login_user(user)
-        return redirect('/')
+        return redirect(url_for('/'))
+    else:
+        return render_template('login.html')
 
-@app.route('/register', methods=['GET'])
-def get_register():
-    return render_template('register.html')
-
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
         name = request.form['name']
         username = request.form['username']
         email = request.form['email']
@@ -74,6 +70,8 @@ def register():
         else:
             login_user(user)
             return redirect('/')
+    else:
+        return render_template('register.html')
 
 @app.route('/logout', methods=['GET'])
 def logout():
