@@ -11,6 +11,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 db = SQLAlchemy(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 class BlogPost(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80), nullable=False)
@@ -26,33 +29,57 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     username = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     confirm = db.Column(db.String(80), nullable=False)
 
-    def __repr__(self):
-        return 'Users' + str(self.id)
+@login_manager.user_loader
+def get_id():
+    return User.query.get(id)
 
-
-
-all_post = [
-    {
-        'title': 'Intial Post',
-        'content': 'The flask script is nice to start a local development server, but you would have to restart it manually after each change to your code. That is not very nice and Flask can do better. If you enable debug support the server will reload itself on code changes, and it will also provide you with a helpful debugger if things go wrong. You can also control debug mode separately from the environment by exporting FLASK_DEBUG=1..',
-        'Author': 'Gideon Nimoh'
-    },
-    {
-        'title': 'Subsequent Post',
-        'content': 'The flask script is nice to start a local development server, but you would have to restart it manually after each change to your code. That is not very nice and Flask can do better. If you enable debug support the server will reload itself on code changes, and it will also provide you with a helpful debugger if things go wrong. You can also control debug mode separately from the environment by exporting FLASK_DEBUG=1..'
-    },
-     {
-        'title': 'Another Post',
-        'content': 'The flask script is nice to start a local development server, but you would have to restart it manually after each change to your code. That is not very nice and Flask can do better. If you enable debug support the server will reload itself on code changes, and it will also provide you with a helpful debugger if things go wrong. You can also control debug mode separately from the environment by exporting FLASK_DEBUG=1..'
-    }
-]
-
-@app.route('/')
+@app.route('/', methods=['GET'])
+@login_required
 def index():
     return render_template('index.html')
+
+@app.route('/login', methods=['GET'])
+def get_login():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login_post():
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        login_user(user)
+        return redirect('/')
+
+@app.route('/register', methods=['GET'])
+def get_register():
+    return render_template('register.html')
+
+@app.route('/register', methods=['POST'])
+def register():
+        name = request.form['name']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm = request.form['confirm']
+        new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
+        db.session.add(new_user)
+        db.session.commit()
+        user = User.query.filter_by(username=username).first()
+        if password != confirm:
+            return render_template('error.html')
+        else:
+            login_user(user)
+            return redirect('/')
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    logout_user(current_user)
+    return redirect('/')
+
 
 @app.route('/post', methods=['GET', 'POST'])
 def post():
@@ -102,41 +129,6 @@ def newpost():
         return redirect('/post')
     else:
         return render_template('/newpost.html')
-
-        
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if username != request.form['username'] or password != request.form['password']:
-            error = 'Try Again: Invalid Credentials'
-        else:
-            flash('You have successfully logged in')
-            return render_template('/post.html', error=error)
-    else:
-        return render_template('login.html')
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        name = request.form['name']
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-        confirm = request.form['confirm']
-        new_user = User(name=name, username=username, email=email, password=password, confirm=confirm)
-        db.session.add(new_user)
-        db.session.commit()
-        if password != confirm:
-            return render_template('error.html')
-        else:
-            return render_template('success.html')
-    else:
-        return render_template('register.html')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
