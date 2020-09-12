@@ -6,6 +6,19 @@
 
 
 {% block body %} 
+<style>
+  body{
+    margin-top: 14%;
+  }
+</style>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{ msg }}</p>
+        {% endfor%}
+    {% endif%}
+{% endwith %}
 
 <div style="margin-top: 10%;">
 <h1 style="display: inline;">Home Page</h1>

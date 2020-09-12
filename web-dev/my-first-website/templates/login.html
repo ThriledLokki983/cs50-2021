@@ -5,8 +5,8 @@
 {% endblock %}
 
 
-
 {% block body %} 
+
 <style>
   .login{
     margin-top: 20%;
@@ -19,6 +19,13 @@
   }
 </style>
 <div class="login">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{ msg }}</p>
+        {% endfor%}
+    {% endif%}
+{% endwith %}
   <form style="width: 300px;"class="form-signin" action="/login" method="POST">
       <img style="margin-left: 38%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
       <h1 style="font-size: 18px; font-weight: bold; text-align: center;">Login</h1><br>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, flash, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
@@ -56,8 +56,10 @@ def login():
         if user and check_password_hash(user.password, password):
             user.authenticated = True
             login_user(user, remember=True)
+            flash("You have successfully logged in")
             return redirect(url_for('home'))
         else:
+            flash("Please check Username or Password")
             return redirect(url_for('login'))
     return render_template('login.html')
 
@@ -73,12 +75,13 @@ def register():
         pswd_hash = generate_password_hash(password)
         user = User.query.filter_by(email=email).first()
         if user or password != confirm:
-            return render_template('error.html')
+            flash("Password do not match or Email already in use", "error")
         else:
             new_user = User(name=name, username=username, email=email, password=pswd_hash, confirm=confirm)
             db.session.add(new_user)
             db.session.commit()
-            #login_user(user)
+            login_user(new_user)
+            flash("You have successfully registered. Please kindly Login below", "info")
             return redirect(url_for('login'))
     else:
         return render_template('register.html')
