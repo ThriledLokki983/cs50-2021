@@ -39,9 +39,13 @@ def get_id(id):
     return User.query.get(id)
 
 @app.route('/', methods=['GET'])
-@login_required
 def index():
     return render_template('index.html')
+
+@app.route('/home', methods=['GET'])
+@login_required
+def home():
+    return render_template('home.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -52,7 +56,7 @@ def login():
         if user and check_password_hash(user.password, password):
             user.authenticated = True
             login_user(user, remember=True)
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
         else:
             return redirect(url_for('login'))
     return render_template('login.html')
@@ -88,7 +92,7 @@ def logout():
     return redirect('/')
 
 
-@app.route('/post', methods=['GET', 'POST'])
+@app.route('/home/post', methods=['GET', 'POST'])
 @login_required
 def post():
     if request.method == 'POST':
@@ -98,20 +102,22 @@ def post():
         new_post = BlogPost(title=post_title, author=post_author, content=post_content)
         db.session.add(new_post)
         db.session.commit()
-        return redirect('/post')
+        return redirect(url_for('post'))
     else:
         all_post = BlogPost.query.order_by(BlogPost.date).all()
         return render_template('post.html', posting=all_post)
 
-@app.route('/post/delete/<int:id>')
+@app.route('/home/post/delete/<int:id>')
+@login_required
 def delete(id):
     posts = BlogPost.query.get_or_404(id)
     db.session.delete(posts)
     db.session.commit()
-    return redirect('/post')
+    return redirect(url_for('post'))
 
 
-@app.route('/post/edit/<int:id>', methods=['GET', 'POST'])
+@app.route('/home/post/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit(id):
     posts = BlogPost.query.get_or_404(id)
 
@@ -120,12 +126,13 @@ def edit(id):
         posts.content = request.form['content']
         posts.author = request.form['author']
         db.session.commit()
-        return redirect('/post')
+        return redirect(url_for('post'))
     else:
         return render_template('edit.html', post=posts)
 
 
-@app.route('/post/new', methods=['GET', 'POST'])
+@app.route('/home/post/new', methods=['GET', 'POST'])
+@login_required
 def newpost():
     if request.method == 'POST':
         post_title = request.form['title']
@@ -134,7 +141,7 @@ def newpost():
         new_post = BlogPost(title=post_title, author=post_author, content=post_content)
         db.session.add(new_post)
         db.session.commit()
-        return redirect('/post')
+        return redirect(url_for('post'))
     else:
         return render_template('/newpost.html')
 
