@@ -4,15 +4,17 @@ from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
+from flask_sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required, lookup, usd
 
-# Configure application
+'''Configure application '''
 app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
 
-# Ensure templates are auto-reloaded
+''' Ensure templates are auto-reloaded '''
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Ensure responses aren't cached
@@ -119,7 +121,34 @@ def quote():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+
+    # Check on submit
+    if request.method == 'POST':
+        user_nmae = request.form['username']
+        password = request.form['password']
+
+        # Hashing Password
+        psw_hash = generate_password_hash(password)
+
+        # Creating a New User into the Database of Users
+        new_user = db.execute("INSERT INTO users(username, hash) VALUES (user_name, psw_hash)")
+        
+        # Check if New User
+        if not new_user:
+            return apology("Username available", 400)
+
+        #Remember user
+        session["user_id"] = new_user
+
+        # Flash a message
+        flash("Welcome! Let's start trading")
+
+        # Redirect user to home page
+        return redirect(url_for("index"))
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -139,3 +168,7 @@ def errorhandler(e):
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

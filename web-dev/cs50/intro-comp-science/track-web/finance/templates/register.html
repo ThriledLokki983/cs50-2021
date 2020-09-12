@@ -18,6 +18,17 @@
 
 <div class="div">
     <form action="/login" method="post">
+
+      <div class="input-group flex-nowrap">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-badge-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5 2.755C12.146 12.825 10.623 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-.245z"/>
+            </svg></span>
+        </div>
+          <input type="text" class="form-control" placeholder="Full Name" id="name" name="name" aria-label="Full Name" aria-describedby="addon-wrapping" required>
+      </div><br>
+
+
         <div class="input-group flex-nowrap">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -26,11 +37,7 @@
             </div>
               <input type="text" class="form-control" placeholder="Username" name="username" aria-label="Username" aria-describedby="addon-wrapping" required>
           </div><br>
-<!--
-            <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
-        </div>
--->
+
         
 <div class="input-group flex-nowrap">
     <div class="input-group-prepend">
@@ -42,12 +49,7 @@
       <input type="password" class="form-control" placeholder="Password" name="password" aria-label="Password" aria-describedby="addon-wrapping" required>
   </div><br>
 
-<!--
-    <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password">
-        </div>
--->
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <button class="btn btn-primary" type="submit">Register</button>
     </form>
 </div>
 
