@@ -71,8 +71,9 @@ def register():
         password = request.form['password']
         confirm = request.form['confirm']
         pswd_hash = generate_password_hash(password)
-        if password != confirm:
-            return render_template('error.html', "Danger")
+        user = User.query.filter_by(email=email).first()
+        if user or password != confirm:
+            return render_template('error.html')
         else:
             new_user = User(name=name, username=username, email=email, password=pswd_hash, confirm=confirm)
             db.session.add(new_user)
