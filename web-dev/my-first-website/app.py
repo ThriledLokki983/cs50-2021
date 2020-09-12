@@ -25,7 +25,6 @@ class BlogPost(db.Model):
     def __repr__(self):
         return 'Blog Post ' + str(self.id)
 
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -33,9 +32,10 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(80), nullable=False)
     password = db.Column(db.String(80), nullable=False)
     confirm = db.Column(db.String(80), nullable=False)
+    authenticated = db.Column(db.Boolean, default=False)
 
 @login_manager.user_loader
-def get_id():
+def get_id(id):
     return User.query.get(id)
 
 @app.route('/', methods=['GET'])
@@ -50,7 +50,8 @@ def login():
         password = request.form['password']
         user = db.session.query(User).filter(User.username == request.form['username']).first()
         if user and check_password_hash(user.password, password):
-            login_user(user)
+            user.authenticated = True
+            login_user(user, remember=True)
             return redirect(url_for('index'))
         else:
             return redirect(url_for('login'))
@@ -79,11 +80,16 @@ def register():
 
 @app.route('/logout', methods=['GET'])
 def logout():
-    logout_user(current_user)
+    user = current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
+    logout_user(user)
     return redirect('/')
 
 
 @app.route('/post', methods=['GET', 'POST'])
+@login_required
 def post():
     if request.method == 'POST':
         post_title = request.form['title']
