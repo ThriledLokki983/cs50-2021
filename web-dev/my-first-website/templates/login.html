@@ -7,6 +7,14 @@
 
 {% block body %} 
 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for msg in messages %}
+        <p>{{ msg }}</p>
+    {% endfor%}
+{% endif%}
+{% endwith %}
+
 <style>
   .login{
     margin-top: 20%;
@@ -17,15 +25,14 @@
     border-radius: 2%;
     padding-left: 12%;
   }
+
+  .custom-switch{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 </style>
+
 <div class="login">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for msg in messages %}
-            <p>{{ msg }}</p>
-        {% endfor%}
-    {% endif%}
-{% endwith %}
   <form style="width: 300px;"class="form-signin" action="/login" method="POST">
       <img style="margin-left: 38%;" class="mb-4" src="/static/images/login.jpg" alt="" width="72" height="72">
       <h1 style="font-size: 18px; font-weight: bold; text-align: center;">Login</h1><br>
@@ -37,7 +44,6 @@
       </div>
         <input type="text" class="form-control" placeholder="Username" id="username" name="username" aria-label="Username" aria-describedby="addon-wrapping" required>
     </div><br>
-
     <div class="input-group flex-nowrap">
       <div class="input-group-prepend">
         <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -48,10 +54,10 @@
         <input type="password" class="form-control" placeholder="Password" id="password" name="password" aria-label="Password" aria-describedby="addon-wrapping" required>
     </div>
 
-    <label>
-      <br>
-      <input style="margin-left: 0%;" type="checkbox" value="remember-me"> Remember me
-    </label>
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="customSwitch1">
+      <label class="custom-control-label" for="customSwitch1">Remember me</label>
+    </div>
     <button style="width: 300px; margin-left: 0%;" class="btn btn-lg btn-primary btn-block" type="submit">Login</button><br> 
     <p style="font-size: small; text-align: center;">No account yet? <a href="/register">Register</a></p>
     <p style="margin-left: 40%; font-weight: bold; font-size: small; color: black;" class="mt-5 mb-3 text-muted">&copy; 2020</p>

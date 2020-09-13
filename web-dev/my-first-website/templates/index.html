@@ -5,20 +5,31 @@
 {% endblock %}
 
 
+
 {% block body %} 
-{% with messages = get_flash_messages() %}
+<style>
+  body{
+    padding: 7%;
+  }
+
+  .h1{
+    margin-top: 5%;
+  }
+</style>
+{% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for msg in messages %}
-            <p>{{ msg }}</p>
+            <p style="margin-top: 2%;">{{ msg }}</p>
         {% endfor%}
     {% endif%}
 {% endwith %}
-<div style="margin-top: 10%;">
+
+<div>
 <h1 style="display: inline;">Home Page</h1>
 <a style="display: inline;" href="/login" class="btn btn-info float-right">Login</a>
 </div>
 <Hr>
-<div class="jumbotron" style="margin-top: 10rem;">
+<div class="jumbotron" style="margin-top: 5rem;">
  <div class="col-sm-8 mx-auto">
    <h1>Welcome</h1>
    <p>This example is a quick exercise to illustrate how the to_do application works. </p>
