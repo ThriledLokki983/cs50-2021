@@ -1,7 +1,7 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from flask_sqlalchemy import SQLAlchemy
@@ -12,10 +12,20 @@ from helpers import apology, login_required, lookup, usd
 
 '''Configure application '''
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///finance.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+db = SQLAlchemy(app)
+
+'''Configure my Model for the db'''
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    username = db.Column(db.String(45), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
+    cash = db.Column(db.Float, nullable=False, default=10000.00)
 
 ''' Ensure templates are auto-reloaded '''
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+
 
 # Ensure responses aren't cached
 @app.after_request
@@ -35,7 +45,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+#db = SQL("sqlite:///finance.db")
 
 # Make sure API key is set
 if not os.environ.get("API_KEY"):
@@ -82,11 +92,13 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = :username",
-                          username=request.form.get("username"))
+        user = db.session.query(Users).filter(Users.username == request.form['username']).first()
+        #rows = db.execute("SELECT * FROM users WHERE username = :username",
+                          #username=request.form.get("username"))
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
+        if user and check_password_hash(user.password, request.form['password']):
+        #if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("hash")):
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
@@ -121,30 +133,9 @@ def quote():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-
     # Check on submit
     if request.method == 'POST':
-        user_nmae = request.form['username']
-        password = request.form['password']
-
-        # Hashing Password
-        psw_hash = generate_password_hash(password)
-
-        # Creating a New User into the Database of Users
-        new_user = db.execute("INSERT INTO users(username, hash) VALUES (user_name, psw_hash)")
-        
-        # Check if New User
-        if not new_user:
-            return apology("Username available", 400)
-
-        #Remember user
-        session["user_id"] = new_user
-
-        # Flash a message
-        flash("Welcome! Let's start trading")
-
-        # Redirect user to home page
-        return redirect(url_for("index"))
+        pass
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
