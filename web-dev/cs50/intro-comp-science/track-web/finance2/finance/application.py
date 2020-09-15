@@ -106,7 +106,6 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-
     transactions = db.execute("""
             SELECT symbol, shares, price, transacted 
             FROM transactions
