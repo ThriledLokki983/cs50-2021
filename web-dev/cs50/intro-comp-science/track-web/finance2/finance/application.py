@@ -43,8 +43,29 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    return apology("TODO")
+    rows = db.execute("""
+        SELECT symbol, SUM(shares) as Total_Shares 
+        FROM transactions 
+        WHERE user_id= :user_id
+        GROUP BY symbol 
+        HAVING Total_Shares > 0;
+        """, user_id=["user_id"])
+    holding=[]
+    grand_total=0
+    for row in rows:
+        stock=lookup(row["symbol"])
+        holding.append({
+            "symbol": stock["symbol"],
+            "name": stock["name"],
+            "shares": row["Total_Shares"],
+            "price": usd(stock["price"]),
+            "total": usd(stock["price"] * row["Total_Shares"])
+        })
+        grand_total += stock["price"] * row["Total_Shares"]
+    row = db.execute("SELECT cash FROM users WHERE id=:user_id", user_id=session["user_id"])
+    cash = row[0]["cash"]
+    grand_total += cash 
+    return render_template("index.html", holding=holding, cash=usd(cash), grand_total=usd(grand_total))
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -72,6 +93,12 @@ def buy():
         db.execute("UPDATE users SET cash=:update_cash WHERE id=:id", 
                     update_cash=update_cash,
                     id=session["user_id"])
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
+                    user_id=session["user_id"],
+                    symbol=stock["symbol"],
+                    shares=shares,
+                    price=stock["price"])
+        flash("Successfully Transaction")
         return redirect("/")
     else:
         return render_template('buy.html')
@@ -174,9 +201,14 @@ def register():
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
+#    """Sell shares of stock"""
 def sell():
-    """Sell shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("sell.html")
+   
+
 
 
 def errorhandler(e):
