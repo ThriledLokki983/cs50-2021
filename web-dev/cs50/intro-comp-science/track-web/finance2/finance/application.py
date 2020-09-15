@@ -49,23 +49,23 @@ def index():
         WHERE user_id= :user_id
         GROUP BY symbol 
         HAVING Total_Shares > 0;
-        """, user_id=["user_id"])
-    holding=[]
-    grand_total=0
+    """, user_id=["user_id"])
+    holdings=[]
+    grand_total= 0
     for row in rows:
-        stock=lookup(row["symbol"])
-        holding.append({
+        stock = lookup(row["symbol"])
+        holdings.append({
             "symbol": stock["symbol"],
             "name": stock["name"],
             "shares": row["Total_Shares"],
             "price": usd(stock["price"]),
-            "total": usd(stock["price"] * row["Total_Shares"])
+            "total": usd(stock["price"] * row["Total_Shares"]) 
         })
         grand_total += stock["price"] * row["Total_Shares"]
-    row = db.execute("SELECT cash FROM users WHERE id=:user_id", user_id=session["user_id"])
-    cash = row[0]["cash"]
+    rows = db.execute("SELECT cash FROM users WHERE id=:user_id", user_id=session["user_id"])
+    cash = rows[0]["cash"] 
     grand_total += cash 
-    return render_template("index.html", holding=holding, cash=usd(cash), grand_total=usd(grand_total))
+    return render_template("index.html", holdings=holdings, cash=cash, grand_total=grand_total)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -79,8 +79,7 @@ def buy():
             return apology("Please enter the shares you want to buy:")
         if not request.form.get("shares").isdigit():
             return apology("Invalid Number of Share")
-        symbol1 = request.form.get("symbol")
-        symbol = symbol1.upper()
+        symbol = request.form.get("symbol").upper()
         stock = lookup(symbol)
         shares = int(request.form.get("shares")) 
         if stock is None: 
@@ -107,8 +106,10 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
+    if request.method == "POST":
+        pass
     """Show history of transactions"""
-    return apology("TODO")
+    return render_template("history.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -188,11 +189,15 @@ def register():
             return apology("Please confirm password", 403)
         if request.form.get('password') != request.form.get('confirmation'):
             return apology("Password do not match", 403)
+        #new_user = request.form.get("username") 
+        #if new_user == db.execute("SELECT * FROM users WHERE username=new_user", new_user=request.method.get("username")):
+            #return apology("Username Already Exist", 403)
         user = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", 
                 username=request.form.get('username'),
                 hash=generate_password_hash(request.form.get('password')))
         if user is None:
             return apology("Unsuccessful Registration", 403)
+        flash("Lets Start TRADING !!!")
         session['user_id'] = user 
         return redirect("/")
     else:
@@ -204,9 +209,52 @@ def register():
 #    """Sell shares of stock"""
 def sell():
     if request.method == "POST":
-        pass
+        if not request.form.get("symbol"):
+            return apology("Please enter the Symbol to buy:")
+        if not request.form.get("shares"):
+            return apology("Please enter the shares you want to buy:")
+        if not request.form.get("shares").isdigit():
+            return apology("Invalid Number of Share")
+        symbol = request.form.get("symbol").upper()
+        stock = lookup(symbol)
+        shares = int(request.form.get("shares")) 
+        if stock is None: 
+            return apology("Invalid Symbol")
+        rows = db.execute("""
+            SELECT symbol, SUM(shares) as totalShares
+            FROM transactions
+            WHERE user_id=:user_id
+            GROUP BY symbol
+            HAVING totalShares > 0;
+        """, user_id=session["user_id"])
+        for row in rows:
+            if row["symbol"] == symbol:
+                if shares > row["totalShares"]:
+                    return apology("Too many Shares")
+
+        rows = db.execute("SELECT cash FROM users WHERE id=:id", id=session["user_id"])
+        cash = rows[0]["cash"]
+
+        updated_cash = cash + shares * stock["price"]
+        db.execute("UPDATE users SET cash=:updated_cash WHERE id=:id", 
+                    updated_cash=updated_cash,
+                    id=session["user_id"])
+        db.execute("INSERT INTO transactions (user_id, symbol, shares, price) VALUES(:user_id, :symbol, :shares, :price)",
+                    user_id=session["user_id"],
+                    symbol=stock["symbol"],
+                    shares= -1 * shares,
+                    price=stock["price"])
+        flash("Successfully Transaction")
+        return redirect("/")
     else:
-        return render_template("sell.html")
+        rows =db.execute("""
+            SELECT symbol
+            FROM transactions
+            WHERE user_id=:user_id
+            GROUP BY symbol
+            HAVING SUM(shares) > 0;
+        """, user_id=session["user_id"])
+        return render_template("sell.html", symbols= [row["symbol"] for row in rows])
    
 
 
