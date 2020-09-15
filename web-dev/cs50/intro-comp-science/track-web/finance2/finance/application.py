@@ -49,7 +49,7 @@ def index():
         WHERE user_id= :user_id
         GROUP BY symbol 
         HAVING Total_Shares > 0;
-    """, user_id=["user_id"])
+    """, user_id=session["user_id"])
     holdings=[]
     grand_total= 0
     for row in rows:
@@ -97,7 +97,7 @@ def buy():
                     symbol=stock["symbol"],
                     shares=shares,
                     price=stock["price"])
-        flash("Successfully Transaction")
+        flash("Successful Transaction")
         return redirect("/")
     else:
         return render_template('buy.html')
@@ -106,10 +106,18 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-    if request.method == "POST":
-        pass
+
+    transactions = db.execute("""
+            SELECT symbol, shares, price, transacted 
+            FROM transactions
+            WHERE user_id =:user_id
+        """, user_id = session["user_id"])
+    for i in range(len(transactions)):
+        transactions[i]["price"] = usd(transactions[i]["price"])
+    symbol = transactions[i]["symbol"]
+    stock = lookup(symbol)
     """Show history of transactions"""
-    return render_template("history.html")
+    return render_template("history.html", transactions=transactions, stock=stock)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -244,7 +252,7 @@ def sell():
                     symbol=stock["symbol"],
                     shares= -1 * shares,
                     price=stock["price"])
-        flash("Successfully Transaction")
+        flash("Successful Transaction")
         return redirect("/")
     else:
         rows =db.execute("""

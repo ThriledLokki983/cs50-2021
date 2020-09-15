@@ -53,3 +53,7 @@ main table{
 main tfoot{
     font-weight: bold;
 }
+
+body{
+    margin-bottom: 10px;
+}
