@@ -57,3 +57,63 @@ main tfoot{
 body{
     margin-bottom: 10px;
 }
+
+.home-bt{
+    font-weight: normal;
+}
+
+.small{
+    font-size: 10px;
+}
+
+.btn-primary{
+    border-width: 1px;
+    background-color: #EAECEE;
+    padding: 5px 40px;
+    color: #000;
+    font-size: 16px;
+    margin: 0px 2px;
+    opacity: 0.8;
+    transition: 0.3s;
+    font-weight: normal;
+  }
+
+  .btn-primary:hover{
+    opacity: 1;
+    font-weight: normal;
+  }
+
+  .register{
+    margin-top: 15%;
+  }
+
+  .register, login, p{
+    font-size: 30px;
+    font-weight: normal;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .input-group{
+    width: 300px;
+    margin-left: 35%;
+}
+
+.form-control{
+font-weight: lighter;
+font-size: 18px;
+}
+
+.login{
+    margin-top: 15%;
+    align-self: center;
+  }
+
+  .stock-info{
+      margin-top: 10%;
+      margin-left: 34%;
+  }
+
+  .stock-foot p{
+      margin-left: -50%;
+      font-size: smaller;
+  }

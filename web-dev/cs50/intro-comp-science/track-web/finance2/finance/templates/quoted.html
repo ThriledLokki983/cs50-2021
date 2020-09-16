@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block main %}
-   <p>
-    A share of {{stock.name}} ({{stock.symbol}}) costs ${{stock.price}}
-   </p>
+<div class="stock-info">
+        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+            <div class="card-header">{{stock.symbol}}</div>
+            <div class="card-body">
+            <h5 class="card-title">{{stock.name}}</h5>
+            <p class="card-text">Costs {{stock.price | usd}}.</p>
+        </div>
+       
+</div>
+<div class="stock-foot">
+    <p>Go back to <a href="/quote"><em>Quote</em></a></p> 
+</div>
+
 {% endblock %}

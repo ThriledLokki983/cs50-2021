@@ -1,13 +1,13 @@
 import os
 
 from cs50 import SQL
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from helpers import apology, login_required, lookup, usd
+from helpers import apology, login_required, lookup, usd, validate
 
 # Configure application
 app = Flask(__name__)
@@ -43,6 +43,8 @@ if not os.environ.get("API_KEY"):
 @app.route("/")
 @login_required
 def index():
+
+    # Query to get sum of all Shares for each Stock(symbol) we have bought so far
     rows = db.execute("""
         SELECT symbol, SUM(shares) as Total_Shares 
         FROM transactions 
@@ -50,9 +52,11 @@ def index():
         GROUP BY symbol 
         HAVING Total_Shares > 0;
     """, user_id=session["user_id"])
+
+    # The query returns a dictionary of value pairs
     holdings=[]
     grand_total= 0
-    for row in rows:
+    for row in rows: 
         stock = lookup(row["symbol"])
         holdings.append({
             "symbol": stock["symbol"],
@@ -61,7 +65,11 @@ def index():
             "price": usd(stock["price"]),
             "total": usd(stock["price"] * row["Total_Shares"]) 
         })
+
+        # An object which takes into account our total cash into consideration
         grand_total += stock["price"] * row["Total_Shares"]
+    
+    # Query from the users database which user's information(cash) to show
     rows = db.execute("SELECT cash FROM users WHERE id=:user_id", user_id=session["user_id"])
     cash = rows[0]["cash"] 
     grand_total += cash 
@@ -103,7 +111,7 @@ def buy():
         return render_template('buy.html')
 
 
-@app.route("/history")
+@app.route("/history", methods=["GET", "POST"])
 @login_required
 def history():
     transactions = db.execute("""
@@ -111,12 +119,18 @@ def history():
             FROM transactions
             WHERE user_id =:user_id
         """, user_id = session["user_id"])
-    for i in range(len(transactions)):
-        transactions[i]["price"] = usd(transactions[i]["price"])
-    symbol = transactions[i]["symbol"]
-    stock = lookup(symbol)
+    holdings = []
+    for trans in transactions:
+        stock = lookup(trans["symbol"])
+        holdings.append({
+            "symbol": stock["symbol"],
+            "name": stock["name"],
+            "shares": trans["shares"],
+            "price": usd(stock["price"]),
+            "transacted": trans["transacted"]
+        })
     """Show history of transactions"""
-    return render_template("history.html", transactions=transactions, stock=stock)
+    return render_template("history.html", transactions=holdings)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -194,6 +208,9 @@ def register():
             return apology("Please Provide a password", 403)
         if not request.form.get('confirmation'):
             return apology("Please confirm password", 403)
+        validate_error = validate(request.form.get("password"))
+        if validate_error:
+            return validate_error
         if request.form.get('password') != request.form.get('confirmation'):
             return apology("Password do not match", 403)
         #new_user = request.form.get("username") 
