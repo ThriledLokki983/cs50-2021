@@ -213,9 +213,6 @@ def register():
             return validate_error
         if request.form.get('password') != request.form.get('confirmation'):
             return apology("Password do not match", 403)
-        #new_user = request.form.get("username") 
-        #if new_user == db.execute("SELECT * FROM users WHERE username=new_user", new_user=request.method.get("username")):
-            #return apology("Username Already Exist", 403)
         user = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", 
                 username=request.form.get('username'),
                 hash=generate_password_hash(request.form.get('password')))
