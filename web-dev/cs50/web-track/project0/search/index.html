@@ -19,39 +19,28 @@
     </div>
     </nav>
 
-    <div class="container" style="text-align: center;">
+    <div class="container fluid" style="text-align: center;">
         <p><span style="color: #027FFD; font-size: 80px; font-family: Arial, Helvetica, sans-serif;">D</span><span
                 style="color: #FD0211; font-size: 50px;">e</span><span
                 style="color: #FDEA02; font-size: 50px;">b</span><span
                 style="color: #027FFD; font-size: 50px;">b</span><span
                 style="color: #07C105; font-size: 50px;">i</span><span style="color: #FD0211; font-size: 50px;">e</span>
         </p>
-        <form class="search" action="https://google.com/search">
-            <div class="input-group flex-nowrap cursor">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="addon-wrapping"><svg width="1em" height="1em" viewBox="0 0 16 16"
-                            class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                            <path fill-rule="evenodd"
-                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                        </svg></span>
-                </div>
-                <input type="text" class="form-control search-input" name="search" id="search" aria-label="Search"
-                    aria-describedby="addon-wrapping" required>
-                <i></i>
-            </div>
     </div>
-    <div class="container d-flex justify-content-lg-center">
-        <input class="btn btn-light" type="submit" value="Google Search">
-        <input class="btn btn-light" type="submit" value="I'm Feeling Lucky">
-    </div>
-    <p style="font-size: 13px; margin-top: 15px; font-weight: normal;">Debbie offered in: <a href="#">Nederlands</a><a
-            href="#">
-            Frysk</a>
-    </p>
+    <form class="container d-flex justify-content-lg-center" action="https://google.com/search">
+        <input class="form-control align-content-center" type="text" name="q">
     </form>
+    <div class="container d-flex justify-content-lg-center">
+        <input class="btn btn-light first" type="submit" value="Google Search">
+        <input class="btn btn-light second" type="submit" value="I'm Feeling Lucky">
     </div>
+
+    <div class="dutch">
+        <p style="font-size: 13px; margin-top: 15px; font-weight: normal;">Debbie offered in: <a href="#"> Nederlands
+            </a><a href="#"> Frysk</a>
+        </p>
+    </div>
+
 
     <footer class="footer">
         <hr>
