@@ -19,7 +19,7 @@
     </div>
     </nav>
 
-    <div class="container fluid" style="text-align: center;">
+    <div class="container fluid title" style="text-align: center;">
         <p><span style="color: #027FFD; font-size: 80px; font-family: Arial, Helvetica, sans-serif;">D</span><span
                 style="color: #FD0211; font-size: 50px;">e</span><span
                 style="color: #FDEA02; font-size: 50px;">b</span><span
@@ -27,33 +27,41 @@
                 style="color: #07C105; font-size: 50px;">i</span><span style="color: #FD0211; font-size: 50px;">e</span>
         </p>
     </div>
-    <form class="container d-flex justify-content-lg-center" action="https://google.com/search">
-        <input class="form-control align-content-center" type="text" name="q">
-    </form>
-    <div class="container d-flex justify-content-lg-center">
+    <div class="container input-search">
+        <div class="search-btn">
+            <img class="icon" src="./node_modules/bootstrap-icons/icons/search.svg">
+        </div>
+        <form action="https://google.com/search">
+            <input class="form-control align-content-center" type="text" name="q">
+        </form>
+    </div>
+
+    <div class="container fluid justify-content-lg-center">
         <input class="btn btn-light first" type="submit" value="Google Search">
         <input class="btn btn-light second" type="submit" value="I'm Feeling Lucky">
     </div>
 
-    <div class="dutch">
+    <div class="container dutch">
         <p style="font-size: 13px; margin-top: 15px; font-weight: normal;">Debbie offered in: <a href="#"> Nederlands
             </a><a href="#"> Frysk</a>
         </p>
     </div>
 
 
-    <footer class="footer">
-        <hr>
-        <span style="padding-left: 20px;" class="text-muted">Nederlands</span>
-        <hr>
-        <span style="padding-left: 20px;" class="text-muted inline">Advertising</span>
-        <span class="text-muted inline ml-4">Business</span>
-        <span class="text-muted inline ml-4">About</span>
-        <span class="text-muted inline ml-4">How Debbie Works</span>
-        <span style="padding-right: 20px;" class="text-muted inline float-right ml-3"> Settings</span>
-        <span class="text-muted inline float-right ml-3"> Services</span>
-        <span class="text-muted inline float-right ml-3"> Privacy</span>
-        <hr>
+    <footer class="footer mt-auto py-4">
+        <div class="foot fluid">
+            <hr>
+            <span style="padding-left: 20px;" class="text-muted">Nederlands</span>
+            <hr>
+            <span style="padding-left: 20px;" class="text-muted inline">Advertising</span>
+            <span class="text-muted inline ml-4">Business</span>
+            <span class="text-muted inline ml-4">About</span>
+            <span class="text-muted inline ml-4">How Debbie Works</span>
+            <span style="padding-right: 20px;" class="text-muted inline float-right ml-3"> Settings</span>
+            <span class="text-muted inline float-right ml-3"> Services</span>
+            <span class="text-muted inline float-right ml-3"> Privacy</span>
+            <hr>
+        </div>
     </footer>
 </body>
 
