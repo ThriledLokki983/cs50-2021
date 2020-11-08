@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="index.css" rel="stylesheet">
+        <title>Homepage</title>
+        <style>
+                 .collapsible {
+                 background-color: #777;
+                 color: white;
+                 cursor: pointer;
+                 padding-top: 5px;
+                 padding-left: 20px;
+                 padding-bottom: 5px;
+                 width: 100%;
+                 border: none;
+                 text-align: left;
+                 outline: none;
+                 font-size: 30px;
+                 border-radius: 5px;
+                 font-weight: lighter;
+                 }
+
+                 .active, .collapsible:hover {
+                 background-color: #555;
+                 }
+                .content {
+                 padding-top: 20px;
+                 padding-bottom: 5px;
+                 padding-left: 10px;
+                 padding-right: 10px;
+                 display: block;
+                 overflow: hidden;
+                 background-color: #000;
+                 }
+
+                 .content p {
+                     color: #fff;
+                 }
+
+                 hr {
+                border-style: solid;
+                border-width: 1px;
+            }
+
+            .icon {
+                padding-left: 72rem;
+            }
+
+            a .icom:hover{
+                color: black;
+                font-weight: bolder;
+            }
+        </style>
+    </head>
+    <body style="height: 100%; background-color: #000">
+        <div class="container">
+            <div class="top">
+                <header class="head">
+                    <div class="inner-head">
+                          <!--
+                            <h3 class="brand"><b><a style="color: #000; font-weight: lighter;" href="index.html">HomePage</a></b></h3>
+                        -->
+                        <nav class="nav-bar">
+                        <a class="nav-link" href="home.html">Home</a>
+                        <a class="nav-link active" href="about.html">About</a>
+                        <a class="nav-link" href="contact.html">Contact</a>
+                        <a style="margin-right: 10rem;"></a>
+                     <!--
+                            <a>
+                            <form >
+                                <input type="text" placeholder="search">
+                            </form>
+                        </a>
+                     -->
+                        </nav>
+                    </div>
+                </header>
+            </div>
+        </div>
+
+        <div class="mainpage">
+            <main class="inner cover">
+                <button type="button" class="collapsible">About Me </button>
+                <div class="content">
+                    <p>As already read at the <a href="index.html">cover page</a>, the distance between my background and programming a very wide. But because of the passion I have coupled with the determination to still learn and become a professional programmer, I still pursue this course towards achieving that goal. Most people would have given p long time ago but not me, Gideon.
+
+                        Because of this passion, I decided to apply for work as a programmer even though I am not yet one. I landed an interview with one <a href="https://wiersma-ict.nl">Wiersma-ict-solutions</a>. I had a wonderful interview. They liked me; I like liked them but the work I was to be assigned was way bigger than I could do. They offered me the chance to come back later and have an internship with them and probably start working afterwards with them. I liked that idea. But, in order to go on with my day-to-day activities like studying online, the bills needed to be paid as well. Not long, I saw an Ad from ASUS Technologies, for an account manger position. I just jumped to it. I must say, it is a nice position but not something I would like to be doing for 5years consecutively. No! So, weekdays, I work for ASUS and on weekends I continue with my programming course. It is not an easy task at all but I love it, most especially on the weekends. Btw, my girlfriend hates weekends because I spend less time with her. It is such a pity but she is coming around.
+                        </p>
+                </div>
+                <hr />
+            </main>
+
+            <script>
+                var coll = document.getElementsByClassName("collapsible");
+                var i;
+
+                for (i = 0; i < coll.length; i++) {
+                  coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.display === "none") {
+                      content.style.display = "block";
+                    }
+                    else {
+                      content.style.display = "none";
+                    }
+                  });
+                }
+                </script>
+
+            <footer class="foot">
+                <div class="inner">
+                    <hr style="color: #fff; border-style: solid; border-width: .5px;"/>
+                  <p style="color:  #7B7D7D;">Copyright &copy; 2020. <a href="#">All rights reserved</a>, by <a href="https://twitter.com/NimohAgyin">@nimohG</a>.</p>
+                </div>
+              </footer>
+        </div>
+    </body>
+</html>

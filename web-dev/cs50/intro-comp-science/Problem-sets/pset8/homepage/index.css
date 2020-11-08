@@ -1,0 +1,247 @@
+html,
+body {
+  height: 100%;
+  background-color: #000;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .top{
+      position: fixed;
+      margin-top: 1rem;
+      display: inline-block;
+  }
+
+  .mainpage{
+      position: absolute;
+      top: 15%;
+      left: 10%;
+      right: 10%;
+      bottom: 0;
+      overflow: hidden;
+      overflow-y: scroll;
+      padding-top: 70px;
+  }
+
+  .foot{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 73vh;
+  }
+
+  footer .inner{
+      text-align: right;
+      font-size: 12px;
+      font-weight: normal;
+  }
+
+  .head{
+      position: relative;
+      margin-bottom: 2rem;
+  }
+
+  .inner-head h3 a{
+      text-decoration: none;
+  }
+
+  .brand{
+      font-size: 40px;
+      font-weight: normal;
+      float: left;
+      color: #7B7D7D;
+      margin-bottom: 0;
+      margin-right: 30rem;
+      margin-left: 0;
+      padding: 10px;
+      padding-bottom: 0;
+  }
+
+  .brand:hover{
+      border-bottom-style: solid;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 10px;
+      border-bottom-color: #fff;
+  }
+
+  .lead{
+      font-size: 18px;
+      font-weight: lighter;
+      text-align: justify;
+      padding-right: 25px;
+      line-height: 1.6;
+      color: #7B7D7D;
+      padding-bottom: 10px;
+  }
+
+  .inner h1{
+      color: #f4f4f4;
+      font-weight: lighter;
+      padding-bottom: 5px;
+  }
+
+  .btn{
+      background-color: #f4f4f4;
+      border-radius: 5px;
+      font-weight: lighter;
+  }
+
+  .btn:hover{
+      font-weight: normal;
+      color: #000;
+  }
+
+  .nav-bar{
+      display: flex;
+      padding: 20px;
+      padding: .95rem 0;
+      background-color: transparent;
+      font-size: 18px;
+      font-weight: lighter;
+  }
+
+  .inner-head{
+      display: inline-block;
+  }
+
+  .nav-bar .nav-link{
+      display: inline-block;
+  }
+
+  .nav-link{
+      margin: 0;
+      padding-bottom: 0;
+      padding-top: 15px;
+      padding-left: 0;
+      padding-right: 0;
+  }
+.nav-link:nth-child(1){
+    margin-right: 2rem;
+}
+
+.nav-link:nth-child(2){
+    margin-right: 2rem;
+}
+
+.nav-link:nth-child(3){
+    margin-right: 12rem;
+}
+
+.nav-bar a{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.nav-bar .send{
+    font-size: 13px;
+    margin-left: 0;
+    font-weight: bold;
+
+}
+form {
+    padding-top: 10px;
+}
+
+ form input{
+    width: 150px;
+    margin-top: 0;
+    border-radius: 5px;
+    font-weight: lighter;
+    font-size: 13px;
+    padding-left: 10px;
+}
+
+  .nav-link:hover{
+    border-bottom-style: solid;
+    border-bottom-color: rgba(255, 255, 255, .25);
+    color: #fff;
+    font-weight: normal;
+  }
+
+  .nav-bar .active {
+      background-color: #000;
+    border-bottom-style: solid;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-color: #fff;
+    font-weight: normal;
+  }
+
+  .register{
+    width: 700px;
+    height: 610px;
+	color: #fff;
+	top: 40%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	border-radius: 10px;
+    padding: 30px;
+  }
+
+  .register h1{
+	margin: 0;
+	text-align: center;
+	font-size: 40px;
+	left: calc(50% - 50px);
+}
+
+.register input{
+	width: 50%;
+	margin-bottom: 20px;
+}
+
+.register input[type="text"]
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+    font-size: 16px;
+    font-weight: lighter;
+    padding-left: 10px;
+}
+
+textarea{
+    margin-top: 10px;
+    width: 90%;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #7b7d7d;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-weight: lighter;
+    opacity: .9;
+}
+
+.register input:nth-child(1){
+    margin-bottom: 20px;
+}
+
+.register input[type="submit"]{
+    width: 150px;
+    margin-top: 15px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: transparent;
+    color: #fff;
+}
+
+.register input[type="submit"]:hover{
+    background-color: #fff;
+    color: black;
+}
+
+.register p{
+    padding: 0px 20px 0 20px;
+    font-weight: normal;
+}

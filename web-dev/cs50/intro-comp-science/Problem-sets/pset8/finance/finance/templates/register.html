@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form class="register">
+        <img alt="{{ top }}" c="login.png" class="avatar"><br />
+        <h2>Register Here</h2>
+        <hr />
+        <p>Once registered, you are guaranteed a start-up of <a href="#"><b>$10,000</b></a> to start with buying and selling of stocks</p><br />
+        <input type="text" placeholder="Username">
+        <input type="text" placeholder="Password">
+        <input type="text" placeholder="Confirm password">
+        <input type="submit" value="Register">
+        <div class="regFoot">
+        <a> Already have an account?</a>
+        <a href="#">Login Here</a>
+        </div>
+    </form>
+{% endblock %}

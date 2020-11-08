@@ -1,0 +1,130 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+
+.register {
+	width: 550px;
+	height: 610px;
+	background: #000;
+	color: #fff;
+	margin-top: 40%;
+	left: 50%;
+	position: relative;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	border-radius: 15px;
+	padding: 20px;
+	display:block;
+}
+
+.register input[type="text"] {
+    width: 70%;
+    border-style: solid;
+    font-size:18px;
+}
+
+.register input[type="submit"]{
+    width: 40%;
+	border: none;
+	outline: none;
+	height: 40px;
+	background: #fb2525;
+	color: #fff;
+	font-size: 18px;
+	border-radius: 10px;
+}
+
+.register input[type="radio"]{
+	border: none;
+	outline: none;
+}
+
+.register input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #ffc107;
+	color: #000;
+}
+
+.register input{
+    margin-bottom: 1.5rem;
+    border-radius: 3px;
+    padding-left: 10px;
+    font-weight:lighter;
+}
+
+.register h2{
+    text-align:center;
+    font-size: 50px;
+    font-weight: lighter;
+}
+
+.register hr{
+    border-style: solid;
+    border-width: 1px;
+    width: 60%;
+}
+
+.register p{
+    font-weight: lighter;
+    text-align:center;
+    font-size: 13px;
+}
+
+.regFoot{
+    padding-top: 7rem;
+}
+
+.avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -50px;
+	left: calc(50% - 50px);
+}

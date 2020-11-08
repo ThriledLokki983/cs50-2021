@@ -1,0 +1,7 @@
+Ask the user for an input (height of their pyramid)
+creat a loop which checks ----
+if the input from the user is outside the range of (1-8), repeat step 1 until user fulfills the condition.
+start the printout of the pyramid if condition is met.
+--- begin by printing empty spaces and only print one # at the end of the first row
+--- increase the printout on the next row by 1
+--- Repeat this step at each column until the number given by the user is reached.
