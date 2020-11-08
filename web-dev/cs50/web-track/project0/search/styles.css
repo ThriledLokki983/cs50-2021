@@ -4,10 +4,15 @@ body {
  font-size: 1rem;
  font-weight: 400;
  line-height: 1.5;
+ height: 100vh;
  color: #212529;
  background-color: #fff;
  -webkit-text-size-adjust: 100%;
  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.container-fluid {
+ margin: 0;
 }
 
 
@@ -24,9 +29,11 @@ body {
  text-align: center;
 }
 
-.title {
+.title-search {
  padding-bottom: 0px;
 }
+
+.images {}
 
 .input-search {
  padding-bottom: 15px;
@@ -59,40 +66,46 @@ body {
 
 .footer {
  font-size: 14px;
+ margin: 0;
 }
 
 .foot {
  background-color: #F2F3F4;
 }
 
-@media (max-width: 1399.98px) {
- .modal-fullscreen-xxl-down {
-  width: 100vw;
-  max-width: none;
-  height: 100%;
-  margin: 0;
- }
-
- .modal-fullscreen-xxl-down .modal-content {
-  height: 100%;
-  border: 0;
-  border-radius: 0;
- }
-
- .modal-fullscreen-xxl-down .modal-header {
-  border-radius: 0;
- }
-
- .modal-fullscreen-xxl-down .modal-body {
-  overflow-y: auto;
- }
-
- .modal-fullscreen-xxl-down .modal-footer {
-  border-radius: 0;
- }
-}
-
 .hr {
  padding-bottom: -5px;
  padding-top: -5px;
+}
+
+.dutch {
+ margin-bottom: 4%;
+}
+
+.camera {
+ position: absolute;
+ right: 20px;
+ bottom: 23.5px;
+ width: 25px;
+ height: 25px;
+}
+
+.camera:hover {}
+
+.thumbnail {
+ width: 20px;
+ height: 20px;
+ margin-right: 10px;
+}
+
+.login {
+ padding: 1px 12px 1px 12px;
+ border-radius: 2px;
+ opacity: 0.9;
+ font-size: 14px;
+ font-weight: bold;
+}
+
+.top {
+ font-size: 14px;
 }
