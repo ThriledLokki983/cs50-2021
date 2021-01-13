@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
    return 1;
   }
  }
-
+// get the text from user
  text = get_string("plaintext: ");
  number = atoi(argv[1]);
 
