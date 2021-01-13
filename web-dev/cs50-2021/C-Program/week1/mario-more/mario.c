@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <cs50.h>
 
+
+// This is the mario-more program 
+
+
 int main(void)
 {
  // Prompting the user for an input
