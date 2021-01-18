@@ -46,15 +46,10 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
             float new_green = fmin(255, (red * 0.349) + (green * 0.686) + (blue * 0.168));
             float new_blue = fmin(255, (red * 0.272) + (green * 0.534) + (blue * 0.131));
 
-            // Set the results to a new variable to be used later
-            int red1 = round(new_red);
-            int green1 = round(new_green);
-            int blue1 = round(new_blue);
-
             // Set the new values to our pixels
-            image[i][j].rgbtRed = red1;
-            image[i][j].rgbtGreen = green1;
-            image[i][j].rgbtBlue = blue1;
+            image[i][j].rgbtRed = (int)(round(new_red));
+            image[i][j].rgbtGreen = (int)(round(new_green));
+            image[i][j].rgbtBlue = (int)(round(new_blue));
         }
     }
     return;
