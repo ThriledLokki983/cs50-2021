@@ -87,9 +87,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             average_blue = average_green = average_red = count = 0;
 
             // Grab the old color values of all of the 9 pixelsthat forms a grid of the original pixel (Box Blur)
-            for (int k = i - ((BLUR - 1) / 2); k < i + ((BLUR - 1) / 2); k++)
+            for (int k = i - ((BLUR - 1) / 2); k <= i + ((BLUR - 1) / 2); k++)
             {
-                for (int l = j - ((BLUR - 1) / 2); l < j + ((BLUR - 1) / 2); l++)
+                for (int l = j - ((BLUR - 1) / 2); l <= j + ((BLUR - 1) / 2); l++)
                 {
                     if ((k >= 0 && l < height) && (l >= 0 && l < width))
                     {
