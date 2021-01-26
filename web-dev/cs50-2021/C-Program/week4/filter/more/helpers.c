@@ -1,4 +1,8 @@
 #include "helpers.h"
+#include <math.h>
+#include <stdlib.h>
+#include <cs50.h>
+#include "stdio.h"
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -99,5 +103,74 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
-    return;
+    //create temporary values to store the calculations
+    float sumBlueY;
+    float sumGreenY;
+    float sumRedY;
+    float sumBlueX;
+    float sumGreenX;
+    float sumRedX;
+    float modifierX;
+    float modifierY;
+    //create a temporary table of colors to not alter the calculations
+    RGBTRIPLE temp[height][width];
+
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            //Resets values for every pixel
+            sumBlueY = 0.0;
+            sumGreenY = 0.0;
+            sumRedY = 0.0;
+            sumBlueX = 0.0;
+            sumGreenX = 0.0;
+            sumRedX = 0.0;
+
+            // sums values of the pixel and 8 neighboring ones after applying a modifier, skips iteration if it goes outside the pic
+            for (int k = -1; k < 2; k++)
+            {
+                if (j + k < 0 || j + k > height - 1)
+                {
+                    continue;
+                }
+
+                for (int h = -1; h < 2; h++)
+                {
+                    if (i + h < 0 || i + h > width - 1)
+                    {
+                        continue;
+                    }
+
+                    // calculates modifiers for vertical and horizantal borders
+                    modifierX = (k + 1 * k - k * abs(h));
+                    modifierY = (h + 1 * h - h * abs(k));
+
+                    sumBlueX += image[j + k][i + h].rgbtBlue * modifierX;
+                    sumGreenX += image[j + k][i + h].rgbtGreen * modifierX;
+                    sumRedX += image[j + k][i + h].rgbtRed * modifierX;
+
+                    sumBlueY += image[j + k][i + h].rgbtBlue * modifierY;
+                    sumGreenY += image[j + k][i + h].rgbtGreen * modifierY;
+                    sumRedY += image[j + k][i + h].rgbtRed * modifierY;
+                }
+            }
+
+            // obtains the final values of the pixels combining X and Y calculations
+            temp[j][i].rgbtBlue = limit(round(sqrt(sumBlueX * sumBlueX + sumBlueY * sumBlueY)));
+            temp[j][i].rgbtGreen = limit(round(sqrt(sumGreenX * sumGreenX + sumGreenY * sumGreenY)));
+            temp[j][i].rgbtRed = limit(round(sqrt(sumRedX * sumRedX + sumRedY * sumRedY)));
+        }
+    }
+
+    //copies values from temporary table
+    for (int i = 0; i < width; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            image[j][i].rgbtBlue = temp[j][i].rgbtBlue;
+            image[j][i].rgbtGreen = temp[j][i].rgbtGreen;
+            image[j][i].rgbtRed = temp[j][i].rgbtRed;
+        }
+    }
 }
