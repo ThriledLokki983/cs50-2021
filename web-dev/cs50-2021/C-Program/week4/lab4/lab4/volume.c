@@ -36,9 +36,7 @@ int main(int argc, char *argv[])
     float factor = atof(argv[3]);
 
 
-// TODO: Copy header from input file to output file // 
-
-
+    // Copy header from input file to output file // 
     // Bytes to read until end of file
     int16_t sample;
     uint8_t header [HEADER_SIZE];

@@ -2,9 +2,9 @@ sort1 uses: TODO
 
 How do you know?: TODO
 
-sort2 uses: TODO
+sort2 uses: Bubble sort
 
-How do you know?: TODO
+How do you know?: the run time is faster for all the dataset compared to the other sorting algoritm (sort1 & sort3)
 
 sort3 uses: TODO
 

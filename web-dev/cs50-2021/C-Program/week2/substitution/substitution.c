@@ -7,23 +7,27 @@
 
 int main(int argc, string argv[])
 {
+
+ // Get the key & validate key
  if (argc != 2)
  {
   printf("Usage: ./substitution key\n");
   return 1;
  }
 
+// Checking for length
  if (strlen(argv[1]) != 26)
  {
  printf("key must be at least 26 characters. \n");
   return 1;
  }
 
+// Check for Alphabetic characters
 for (int i = 0; i < strlen(argv[1]); i++)
 {
  if(!isalpha(argv[1][i]))
  {
-  printf("Only alphabetical keys:\n");
+  printf("Key must contain only alphabetical characters:\n");
   return 1;
  }
 }
@@ -35,7 +39,7 @@ for (int i = 0; i < strlen(argv[1]); i++)
  alphabet[1][i] = argv[1][i];
 }
 
-
+// CHeck for repeated  alphabetic characters
 for (int i = 0; i < strlen(argv[1]); i++)
 {
  int j = 0;
@@ -53,9 +57,11 @@ for (int i = 0; i < strlen(argv[1]); i++)
  }
 }
 
-//finally made it to the algorithm; please recommend something better
+// Prompt user for input
 string plaintext = get_string("Plaintext: ");
 printf("ciphertext: ");
+
+//Incipher the inout from the user.
 for (int i = 0, j = strlen(plaintext); i < j; i++)
 {
  if (isalpha(plaintext[i]))
@@ -83,6 +89,7 @@ for (int i = 0, j = strlen(plaintext); i < j; i++)
   }
 else
   {
+   // Print the ciphered text
    printf("%c", plaintext[i]);
   }
 }
