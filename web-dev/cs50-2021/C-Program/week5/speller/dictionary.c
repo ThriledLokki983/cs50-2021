@@ -19,7 +19,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 10000;
 
 // initialise positive hash value using unsigned int 
 unsigned int hash_value;
@@ -150,7 +150,6 @@ bool unload(void)
                 // Now free tmp
                 free(tmp);
             }
-
             /* However, if cur is NULL */
             if (i == N - 1 && cur == NULL)
             {
