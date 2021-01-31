@@ -73,4 +73,38 @@ TRIES - it is a tree each of whose node is an array of pointers
 Search time = O(1) // constant time
 */
 
+
+/*
+ARRAY
+----------------
+insertion is bad
+Deletion is bad
+Lookup is great
+Relatively easy to sort
+Relatively small size-wise
+Stuck with a fixed, no flexibility
+*/
+
+
+/*
+LINKED-LIST
+------------
+Insertion is easy
+Deletion is easy
+Lookup is bad
+Relatively difficult to sort
+Relatively small size-wise
+*/
+
+
+
+/*
+TRIES 
+---------------
+Insertion is complex
+Deletion is easy
+Lookup is fast
+Already sorted
+Rapidly becomes huge, even with little data present, not great if space is premium
+*/
 } 
