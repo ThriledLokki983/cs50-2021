@@ -8,7 +8,7 @@ def main():
     while True:
         # Getting input from the user
         dollar = cs50.get_float("Change Owed: ")
-    # The input should be a non-negative integer
+    # The input should be a non-negative integer in 
         if dollar >= 0:
             break
 
